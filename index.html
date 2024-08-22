@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Grid</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .contenido {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
+        .box-img {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.425);
+            border: 4px solid #919191;
+            border-radius: 9px;
+            overflow: hidden;
+        }
+
+        .class-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bt-downdload {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 33px;
+            height: 33px;
+            background-color: rgba(0, 0, 0, 0.534);
+            color: rgb(20, 141, 211);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .bt-downdload:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenido" id="imageContainer"></div>
+
+    <script>
+     
+        async function loadImages() {
+            try {
+                const response = await fetch('images.json');  
+                const data = await response.json();
+
+    
+                const container = document.getElementById('imageContainer');
+
+            
+                data.images.forEach((image) => {
+        
+                    const boxImg = document.createElement('div');
+                    boxImg.className = 'box-img';
+
+           
+                    const img = document.createElement('img');
+                    img.className = 'class-img';
+                    img.src = image.src;
+                    img.alt = image.alt;
+
+              
+                    const downloadBtn = document.createElement('div');
+                    downloadBtn.className = 'bt-downdload';
+                    downloadBtn.innerText = 'D';
+
+                 
+                    boxImg.appendChild(img);
+                    boxImg.appendChild(downloadBtn);
+
+          
+                    container.appendChild(boxImg);
+
+              
+                    downloadBtn.addEventListener('click', function() {
+                        const timestamp = generateTimestamp(); 
+                        downloadImage(image.src, `${timestamp}.jpg`);
+                    });
+                });
+            } catch (error) {
+                console.error('Error al cargar las imágenes:', error);
+            }
+        }
+
+  
+        function generateTimestamp() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Mes de 0 a 11, por eso sumamos 1
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+            
+            return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}-${milliseconds}`;
+        }
+
+ 
+        function downloadImage(url, customName) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = customName; 
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link); 
+        }
+
+  
+        loadImages();
+    </script>
+
+</body>
+</html>
