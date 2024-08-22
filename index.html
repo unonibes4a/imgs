@@ -1,135 +1,957 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Grid</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+      }
+      body * {
+        margin-bottom: 2rem;
+      }
 
-        .contenido {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            grid-gap: 10px;
-            padding: 10px;
-        }
+      .contenido {
+        margin-top: 4rem;
+        position: relative;
+        top: 10%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+        gap: 1.24rem 2rem;
+        padding: 0px;
 
-        .box-img {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            background-color: rgba(255, 255, 255, 0.425);
-            border: 4px solid #919191;
-            border-radius: 9px;
-            overflow: hidden;
-        }
+        justify-content: center;
+      }
 
-        .class-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+      .box-img {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        background-color: rgba(255, 255, 255, 0.425);
+        border: 4px solid #919191;
+        border-radius: 9px;
+        overflow: hidden;
+      }
 
-        .bt-downdload {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 33px;
-            height: 33px;
-            background-color: rgba(0, 0, 0, 0.534);
-            color: rgb(20, 141, 211);
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: 0.3s;
-            cursor: pointer;
-        }
+      .class-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-        .bt-downdload:hover {
-            color: white;
-        }
+      .bt-downdload {
+      
+        width: 33px;
+        height: 33px;
+        background-color: rgba(0, 0, 0, 0.856);
+        color: rgb(255, 255, 255);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s;
+        cursor: pointer;
+
+        border-radius: 50%;
+        font-size: 12px;
+      }
+
+      .bt-downdload:hover {
+        color: rgb(0, 174, 255);
+      }
+      .divAbirirImgs{
+   
+        width: 33px;
+        height: 33px;
+        background-color: rgba(0, 0, 0, 0.856);
+        color: rgb(255, 255, 255);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s;
+        cursor: pointer;
+        border-radius: 50%;
+        font-size: 12px;
+      }
+      .divAbirirImgs:hover {
+        color: rgb(0, 174, 255);
+      }
+
+      .clMenuSeleccion::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .clMenuSeleccion::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .clMenuSeleccion::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 4px;
+      }
+
+      .clMenuSeleccion::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
+      #idboxT {
+        position: fixed;
+        top: 0%;
+        left: 0%;
+
+        /*     transform: translate(-50%,-50%); */
+
+        width: 100%;
+        height: 100vh;
+
+        min-height: 250px;
+        min-width: 250px;
+        background-color: rgb(255, 255, 255);
+        z-index: 20;
+        overflow-y: scroll;
+        display: none;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+      }
+      #idboxT * {
+        margin-bottom: 2rem;
+      }
+
+      #idClose {
+        position: fixed;
+        top: 40%;
+        right: 2%;
+        width: 44px;
+        height: 44px;
+        transform: translate(-50%, -50%);
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.568);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        font-size: 12px;
+        border: 3px solid #838383;
+        border-radius: 50%;
+        transition: 1s;
+        cursor: pointer;
+        z-index: 6;
+      }
+      #idClose:hover {
+        color: #33b0e2;
+      }
+
+      #idDescargas {
+        position: fixed;
+        top: 60%;
+        right: 2%;
+        width: 44px;
+        height: 44px;
+        transform: translate(-50%, -50%);
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.493);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        font-size: 12px;
+        border: 3px solid #838383;
+        border-radius: 50%;
+        transition: 1s;
+        cursor: pointer;
+        z-index: 6;
+      }
+      #idDescargas:hover {
+        color: #33b0e2;
+      }
+      .classSumamargin {
+        margin-top: 3rem;
+      }
+      .clidImgPro {
+        width: 100%;
+        height: 100%;
+        min-width: 250px;
+        min-height: 250px;
+        max-width: 400px;
+        max-height: 400px;
+      }
+
+      .bt-containerImgs{
+        position: absolute;
+        bottom: -40px;
+        left: 0%;
+        width: 100%;
+        height: 40px;
+        display: flex;
+	flex-direction: row;
+ 
+      }
+      .bt-containerImgs *{
+        margin-left: 1rem;
+      }
+      
+
+     
+      @import url('https://fonts.googleapis.com/css?family=Nova+Mono');
+h1{
+    font-family: "Nova Mono", monospace;
+    text-align: center;
+    font-size: 35px;
+    color: rgb(0, 0, 0);
+    background-color: rgba(84, 84, 84, 0.13);
+    text-shadow: rgba(0, 0, 0, 0.164) 2px 2px 2px;
+    
+}
+.cldivklineal{
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    width: 37px;
+    height: 100%;
+    background-color: #33b0e2;
+    border-right: 5px dotted #000000;
+border-radius: 9px;
+background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(70, 70, 70, 0.521) 100%);
+}
     </style>
-</head>
-<body>
+  </head>
+  <body>
 
+    <h1>Imagenes para  el diseño de vide juegos </h1>
+
+    <div class="cldivklineal"></div>
+    <div id="idboxT">
+      <div id="idClose" onclick="fcerrar( )">close</div>
+      <div id="idDescargas" onclick="descargar()">descargas</div>
+      <img
+        class="clidImgPro classSumamargin"
+        id="idImgPro1"
+        src=""
+        alt="imgPro"
+      /><img class="clidImgPro" id="idImgPro2" src="" alt="imgPro2" />
+    </div>
     <div class="contenido" id="imageContainer"></div>
 
     <script>
-     
-        async function loadImages() {
-            try {
-                const response = await fetch('images.json');  
-                const data = await response.json();
+      var globalObj = {
+        imgini: new Image(),
+        canvas: null,
+        canvasFill: document.createElement("canvas"),
+        canvasDrawPor1: document.createElement("canvas"),
+        canvasDrawPor2: document.createElement("canvas"),
+        imgPro: new Image(),
+      };
 
-    
-                const container = document.getElementById('imageContainer');
+      async function loadImages() {
+        try {
+          const response = await fetch("./img2024/a.json");
+          const data = await response.json();
 
-            
-                data.images.forEach((image) => {
-        
-                    const boxImg = document.createElement('div');
-                    boxImg.className = 'box-img';
+          const container = document.getElementById("imageContainer");
+
+          data.images.forEach((image) => {
+            let imagenFile = new Image();
+            const boxImg = document.createElement("div");
+            boxImg.className = "box-img";
+            const img = document.createElement("img");
+            img.crossOrigin = "anonymous";
+            img.className = "class-img";
+            imagenFile.src = image.src;
+            img.src = image.src;
+            img.alt = image.alt;
+            img.id = generateUniqueId();
+            imagenFile.id = img.id;
+
+            let nuevoDiv = document.createElement("div");
 
            
-                    const img = document.createElement('img');
-                    img.className = 'class-img';
-                    img.src = image.src;
-                    img.alt = image.alt;
+            nuevoDiv.className ="divAbirirImgs";
+            nuevoDiv.textContent = "imgs";
 
-              
-                    const downloadBtn = document.createElement('div');
-                    downloadBtn.className = 'bt-downdload';
-                    downloadBtn.innerText = 'D';
-
-                 
-                    boxImg.appendChild(img);
-                    boxImg.appendChild(downloadBtn);
-
+            nuevoDiv.onclick = function () {
+                abreimgs(imagenFile);
+            };
           
-                    container.appendChild(boxImg);
+            let containerDivBtimgs = document.createElement("div");
+            containerDivBtimgs.className = "bt-containerImgs";
 
-              
-                    downloadBtn.addEventListener('click', function() {
-                        const timestamp = generateTimestamp(); 
-                        downloadImage(image.src, `${timestamp}.jpg`);
-                    });
-                });
-            } catch (error) {
-                console.error('Error al cargar las imágenes:', error);
-            }
+            let downloadBtn = document.createElement("div");
+            downloadBtn.className = "bt-downdload";
+            downloadBtn.innerText = "D";
+            boxImg.appendChild(img);
+         //   boxImg.appendChild(downloadBtn);
+            boxImg.appendChild(containerDivBtimgs);
+            containerDivBtimgs.appendChild(downloadBtn);
+            containerDivBtimgs.appendChild(nuevoDiv);
+            container.appendChild(boxImg);
+            downloadBtn.addEventListener("click", function () {
+              let timestamp = generateTimestamp();
+
+              preClick(imagenFile);
+            });
+          });
+        } catch (error) {
+          console.error("Error al cargar las imágenes:", error);
+        }
+      }
+      function generateUniqueId() {
+        const now = new Date();
+        return `img-${now.getTime()}`;
+      }
+
+      async function preClick(img) {
+        document.getElementById("idboxT").style.display = "flex";
+        convertidata(img.src, (umbral = 20));
+      }
+      async function abreimgs(img) {
+        document.getElementById("idboxT").style.display = "flex";
+        convertidata(img.src, (umbral = 20));
+      }
+
+      function downloadImage2(url, name) {
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = name + ".png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      function generateTimestamp() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");  
+        const day = String(now.getDate()).padStart(2, "0");
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const milliseconds = String(now.getMilliseconds()).padStart(3, "0");
+
+        return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}-${milliseconds}`;
+      }
+      function downloadImage(imageDataUrl, fileName) {
+        return new Promise((resolve, reject) => {
+          try {
+            const link = document.createElement("a");
+            link.href = imageDataUrl;
+            link.download = fileName;
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            resolve();
+          } catch (error) {
+            reject(
+              new Error(
+                "Error al intentar descargar la imagen: " + error.message
+              )
+            );
+          }
+        });
+      }
+
+      function downloadImage(url, customName) {
+        const link = document.createElement("a");
+        link.href = url;
+        //  link.download = customName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function drawImageOnCanvas(img) {
+        return new Promise((resolve, reject) => {
+          if (!globalObj.canvas) {
+            globalObj.canvas = document.createElement("canvas");
+          }
+          globalObj.imgini.crossOrigin = "anonymous";
+          console.log(img.width);
+
+          const ctx = globalObj.canvas.getContext("2d");
+          globalObj.canvas.width = img.width;
+          globalObj.canvas.height = img.height;
+          globalObj.imgini.onload = function () {
+            ctx.drawImage(globalObj.imgini, 0, 0, img.width, img.height);
+            resolve(globalObj.canvas);
+          };
+          globalObj.imgini.onerror = function () {
+            reject(new Error("Error al cargar la imagen"));
+          };
+          globalObj.imgini.src = img.src;
+        });
+      }
+
+      function aplicarfill(img, w, h) {
+        let canvas = globalObj.canvasFill;
+        canvas.width = w;
+        canvas.height = h;
+        ctx.drawImage(img, 0, 0, w, h);
+        let ctx = canvas.getContext("2d");
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let data = imageData.data;
+
+        var rgba = {
+          r: 0,
+          g: 0,
+          b: 0,
+        };
+
+        for (let i = 0; i < data.length; i += 4) {
+          rgba.r = data[i] / 255;
+          rgba.g = data[i + 1] / 255;
+          rgba.b = data[i + 2] / 255;
+
+          data[i] = rgba.r * 255;
+          data[i + 1] = rgba.g * 255;
+          data[i + 2] = rgba.b * 255;
         }
 
-  
-        function generateTimestamp() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0'); // Mes de 0 a 11, por eso sumamos 1
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
-            
-            return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}-${milliseconds}`;
+        ctx.putImageData(imageData, 0, 0);
+      }
+
+      function convertidata(imgSrc, umbral = 20) {
+        const canvas = globalObj.canvasDrawPor1;
+        const ctx = canvas.getContext("2d");
+        // document.body.appendChild(canvas);
+
+        let img = globalObj.imgPro;
+        img.crossOrigin = "Anonymous";
+        img.src = imgSrc;
+
+        img.onload = function () {
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imageData.data;
+          const width = canvas.width;
+          const height = canvas.height;
+
+          const resultImageData = ctx.createImageData(width, height);
+          const resultData = resultImageData.data;
+          ctx.fillStyle = "#87CEEB";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          for (let y = 1; y < height - 1; y++) {
+            for (let x = 1; x < width - 1; x++) {
+              const idx = (y * width + x) * 4;
+
+              let gx =
+                -data[((y - 1) * width + (x - 1)) * 4] +
+                data[((y - 1) * width + (x + 1)) * 4] +
+                -2 * data[(y * width + (x - 1)) * 4] +
+                2 * data[(y * width + (x + 1)) * 4] +
+                -data[((y + 1) * width + (x - 1)) * 4] +
+                data[((y + 1) * width + (x + 1)) * 4];
+              let gy =
+                -data[((y - 1) * width + (x - 1)) * 4] +
+                -2 * data[((y - 1) * width + x) * 4] +
+                -data[((y - 1) * width + (x + 1)) * 4] +
+                data[((y + 1) * width + (x - 1)) * 4] +
+                2 * data[((y + 1) * width + x) * 4] +
+                data[((y + 1) * width + (x + 1)) * 4];
+
+              let mag = Math.sqrt(gx * gx + gy * gy);
+
+              let intensity = mag > umbral ? 255 - Math.min(mag, 255) : 255;
+
+              intensity = intensity + (Math.random() * 10 - 5);
+              intensity = Math.max(0, Math.min(255, intensity));
+
+              resultData[idx] = intensity;
+              resultData[idx + 1] = intensity;
+              resultData[idx + 2] = intensity;
+              resultData[idx + 3] = 255;
+            }
+          }
+          ctx.putImageData(resultImageData, 0, 0);
+          if (window.innerWidth > 700) {
+            removerClaseCSS("idImgPro1", "clidImgPro");
+          } else {
+            cambiarClaseCSS("idImgPro1", "clidImgPro");
+          }
+
+          document.getElementById("idImgPro1").src = canvas.toDataURL();
+          convertirADibujoSutilConcolor(imgSrc, umbral);
+        };
+      }
+      function descargar() {
+        const contenedor = document.getElementById("idboxT");
+        const imagenes = contenedor.querySelectorAll("img");
+
+        const fechaHora = new Date();
+        const nombreBase = `imagenes_${fechaHora.getTime()}_`;
+
+        imagenes.forEach((imagen, indice) => {
+          const enlaceDescarga = document.createElement("a");
+          enlaceDescarga.href = imagen.src;
+          enlaceDescarga.download = `${nombreBase}${indice}.jpg`;
+
+          document.body.appendChild(enlaceDescarga);
+          enlaceDescarga.click();
+          document.body.removeChild(enlaceDescarga);
+        });
+      }
+      function cambiarClaseCSS(idElemento, claseAReemplazar) {
+        const elemento = document.getElementById(idElemento);
+
+        if (elemento) {
+          if (elemento.classList.contains(claseAReemplazar)) {
+            elemento.classList.remove(claseAReemplazar);
+          }
+
+          elemento.classList.add(claseAReemplazar);
+        } else {
+          console.error("No se encontró un elemento con el ID:", idElemento);
+        }
+      }
+
+      function removerClaseCSS(idElemento, classcss) {
+        const elemento = document.getElementById(idElemento);
+
+        if (elemento) {
+          elemento.classList.remove(classcss);
+        } else {
+          console.error("No se encontró un elemento con el ID:", idElemento);
+        }
+      }
+      function convertirADibujoSutilConcolor(imgSrc, umbral = 20) {
+        const canvas = globalObj.canvasDrawPor2;
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.src = imgSrc;
+
+        img.onload = function () {
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          let imagendataColorbase = ctx.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+          const data = imageData.data;
+          const width = canvas.width;
+          const height = canvas.height;
+
+          ctx.fillStyle = "#87CEEB";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          canvas.willReadFrequently = true;
+          ctx.putImageData(hdrfalse(canvas, imagendataColorbase, 0.7), 0, 0);
+          if (window.innerWidth > 700) {
+            removerClaseCSS("idImgPro2", "clidImgPro");
+          } else {
+            cambiarClaseCSS("idImgPro2", "clidImgPro");
+          }
+          document.getElementById("idImgPro2").src = canvas.toDataURL();
+        };
+      }
+
+      function aplicarEfectoGlowVideoJuego(
+        canvas,
+        intensidad = 0.7,
+        radio = 15
+      ) {
+        const ctx = canvas.getContext("2d");
+
+        const glowCanvas = document.createElement("canvas");
+        const glowCtx = glowCanvas.getContext("2d");
+        glowCanvas.width = canvas.width;
+        glowCanvas.height = canvas.height;
+ 
+        glowCtx.drawImage(canvas, 0, 0);
+        const imageData = glowCtx.getImageData(
+          0,
+          0,
+          glowCanvas.width,
+          glowCanvas.height
+        );
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+
+         
+          if (r > 240 && g > 240 && b > 240) {
+ 
+            data[i + 3] = 255;  
+          } else {
+ 
+            data[i] = data[i + 1] = data[i + 2] = 0;
+            data[i + 3] = 0;
+          }
+        }
+        glowCtx.putImageData(imageData, 0, 0);
+
+ 
+        for (let i = 0; i < radio; i++) {
+          glowCtx.filter = "blur(1px)";
+          glowCtx.drawImage(glowCanvas, 0, 0);
+        }
+        glowCtx.filter = "none";
+ 
+        glowCtx.globalCompositeOperation = "lighter";
+        for (let i = 0; i < 3; i++) {
+          glowCtx.drawImage(glowCanvas, 0, 0);
+        }
+
+        
+        ctx.globalAlpha = intensidad;
+        ctx.globalCompositeOperation = "lighter";
+        ctx.drawImage(glowCanvas, 0, 0);
+        ctx.globalCompositeOperation = "source-over";
+        ctx.globalAlpha = 1;
+
+    
+        ctx.filter = "contrast(110%) saturate(110%)";
+        ctx.drawImage(canvas, 0, 0);
+        ctx.filter = "none";
+        return canvas.toDataURL();
+      }
+
+      function color162024(imageData) {
+        let data = imageData.data;
+
+        var rgba = {
+          r: 0,
+          g: 0,
+          b: 0,
+        };
+
+        var mixinunrela2Pow = function (rgbax, porcent = 0.4, mxpx = 0) {
+          rgba2 = { r: 0.55, g: 0.56, b: 0.335 };
+          let sum = 0.56 / mxpx;
+          rgba2.r *= sum;
+          rgba2.g *= sum;
+          rgba2.b *= sum;
+
+          if (porcent > 1) {
+            porcent = 1;
+          }
+          if (porcent < 0) {
+            porcent = 0;
+          }
+          var clmd = 1.0 - porcent;
+
+          rgbax.r = rgbax.r * clmd + rgba2.r * porcent;
+          rgbax.g = rgbax.g * clmd + rgba2.g * porcent;
+          rgbax.b = rgbax.b * clmd + rgba2.b * porcent;
+
+          return rgbax;
+        };
+
+        for (let i = 0; i < data.length; i += 4) {
+          rgba.r = data[i] / 255;
+          rgba.g = data[i + 1] / 255;
+          rgba.b = data[i + 2] / 255;
+          let mxpx = Math.max(rgba.r, rgba.g, rgba.b);
+          let multi = Math.max(rgba.r, rgba.g, rgba.b) * 1.014 + 0.051;
+          if (multi > 0.9) {
+            multi = 0.9;
+          }
+          let sum = mxpx * 0.042;
+
+          rgba.r = rgba.r + sum;
+          rgba.g = rgba.g + sum;
+          rgba.b = rgba.b + sum;
+          sum = multi;
+
+          mxpx = Math.max(rgba.r, rgba.g, rgba.b);
+
+          let smr = simpleLinealFuncion(0.5, 0.45, 1, 1, mxpx);
+          smr = smr + smr * smr * 0.21;
+          rgba.r *= smr;
+          data[i] = rgba.r * 255;
+          data[i + 1] = rgba.g * 255;
+          data[i + 2] = rgba.b * 255;
+        }
+        return imageData;
+      }
+      function fcerrar() {
+        document.getElementById("idboxT").style.display = "none";
+      }
+
+      function simpleLinealFuncion(x1, y1, x2, y2, val) {
+        let m = 0;
+        let b = 0;
+
+        let dx = x2 - x1;
+        if (dx == 0.0 || dx == 0 || dx == 0.0) {
+          return (y2 - y1) * 0.5;
+        }
+        let dy = y2 - y1;
+        m = dy / dx;
+        b = y2 - m * x2;
+        let e = null;
+        e = m * val + b;
+        return e;
+      }
+
+      function Basecolor162024(imageData) {
+        let data = imageData.data;
+
+        var rgba = {
+          r: 0,
+          g: 0,
+          b: 0,
+        };
+
+        for (let i = 0; i < data.length; i += 4) {
+          rgba.r = data[i] / 255;
+          rgba.g = data[i + 1] / 255;
+          rgba.b = data[i + 2] / 255;
+          let mxpx = Math.max(rgba.r, rgba.g, rgba.b);
+          let multi = Math.max(rgba.r, rgba.g, rgba.b) * 1.014 + 0.4;
+          if (multi > 0.9) {
+            multi = 0.9;
+          }
+          let sum = mxpx * 0.7;
+
+          rgba.r = rgba.r + sum;
+          rgba.g = rgba.g + sum;
+          rgba.b = rgba.b + sum;
+          sum = multi;
+
+          rgba.r *= sum;
+          rgba.r *= sum;
+          rgba.r *= sum;
+
+          data[i] = rgba.r * 255;
+          data[i + 1] = rgba.g * 255;
+          data[i + 2] = rgba.b * 255;
+        }
+        return imageData;
+      }
+
+      function hdrfalse(canvas, imageData, intensidad = 0.5) {
+       
+        const ctx = canvas.getContext("2d");
+        const data = imageData.data;
+
+     
+        for (let i = 0; i < data.length; i += 4) {
+       
+          let [h, s, l] = rgbToHsl(data[i], data[i + 1], data[i + 2]);
+
+    
+          let newL;
+          if (l > 0.5) {
+            newL = l + (1 - l) * intensidad * (l - 0.5) * 2;
+          } else {
+            newL = l - l * intensidad * (0.5 - l) * 2;
+          }
+
+         
+          let newS = Math.min(s * (1 + intensidad * 0.2), 1);
+
+        
+          let [r, g, b] = hslToRgb(h, newS, newL);
+          let maxp = Math.max(r, g, b);
+ 
+          r = r * 0.93;
+          r = r * 0.93;
+          data[i] = r;
+          data[i + 1] = g;
+          data[i + 2] = b;
+        }
+
+        
+        ctx.putImageData(imageData, 0, 0);
+
+ 
+        ctx.filter = "blur(0.5px)";
+        ctx.drawImage(canvas, 0, 0);
+        ctx.filter = "none";
+
+   
+        ctx.globalCompositeOperation = "overlay";
+        ctx.fillStyle = "rgba(128,128,128,0.5)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = "source-over";
+        return imageData;
+      }
+      function rgbToHsl(r, g, b) {
+        (r /= 255), (g /= 255), (b /= 255);
+        const max = Math.max(r, g, b),
+          min = Math.min(r, g, b);
+        let h,
+          s,
+          l = (max + min) / 2;
+
+        if (max === min) {
+          h = s = 0;
+        } else {
+          const d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch (max) {
+            case r:
+              h = (g - b) / d + (g < b ? 6 : 0);
+              break;
+            case g:
+              h = (b - r) / d + 2;
+              break;
+            case b:
+              h = (r - g) / d + 4;
+              break;
+          }
+          h /= 6;
+        }
+        return [h, s, l];
+      }
+
+      function hslToRgb(h, s, l) {
+        let r, g, b;
+
+        if (s === 0) {
+          r = g = b = l;
+        } else {
+          const hue2rgb = (p, q, t) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+          };
+
+          const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+          const p = 2 * l - q;
+          r = hue2rgb(p, q, h + 1 / 3);
+          g = hue2rgb(p, q, h);
+          b = hue2rgb(p, q, h - 1 / 3);
+        }
+
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+      }
+
+      function applyGlowEffect(ctx, imageData, glowRadius) {
+        const width = imageData.width;
+        const height = imageData.height;
+
+      
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.width = width;
+        tempCanvas.height = height;
+        const tempCtx = tempCanvas.getContext("2d");
+
+ 
+        tempCtx.putImageData(imageData, 0, 0);
+
+      
+        tempCtx.filter = `blur(${glowRadius}px)`;
+
+ 
+        const blurredImageData = tempCtx.getImageData(0, 0, width, height);
+
+   
+        ctx.globalAlpha = 0.2;  
+        for (let i = 0; i < 3; i++) {
+          ctx.putImageData(blurredImageData, 0, 0);
         }
 
  
-        function downloadImage(url, customName) {
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = customName; 
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link); 
+        ctx.globalAlpha = 1.0;
+
+ 
+        return ctx.getImageData(0, 0, width, height);
+      }
+
+      function drawGlow(ctx, imageData) {
+        const glowRadius = 10;
+        const resultImageData = applyGlowEffect(ctx, imageData, glowRadius);
+
+ 
+
+        return resultImageData;
+      }
+
+      function aplicarEfectoGlow(canvas, intensidad = 0.5, radio = 10) {
+        canvas.willReadFrequently = true;
+        const ctx = canvas.getContext("2d");
+
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.willReadFrequently = true;
+        const tempCtx = tempCanvas.getContext("2d");
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+
+        tempCtx.drawImage(canvas, 0, 0);
+
+        const imageData = tempCtx.getImageData(
+          0,
+          0,
+          tempCanvas.width,
+          tempCanvas.height
+        );
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          const threshold = 200;
+          if (brightness > threshold) {
+            data[i] = data[i + 1] = data[i + 2] = 255;
+          } else {
+            data[i] = data[i + 1] = data[i + 2] = 0;
+          }
+          data[i + 3] = 255; // Alfa
         }
+        tempCtx.putImageData(imageData, 0, 0);
 
-  
-        loadImages();
+        for (let i = 0; i < radio; i++) {
+          tempCtx.filter = "blur(1px)";
+          tempCtx.drawImage(tempCanvas, 0, 0);
+        }
+        tempCtx.filter = "none";
+
+ 
+        tempCtx.globalAlpha = intensidad;
+
+ 
+        ctx.globalCompositeOperation = "lighter";
+        ctx.drawImage(tempCanvas, 0, 0);
+        ctx.globalCompositeOperation = "source-over";
+
+ 
+        ctx.filter = "contrast(110%)";
+        ctx.drawImage(canvas, 0, 0);
+        ctx.filter = "none";
+        return ctx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+      }
+
+ 
+
+      loadImages();
     </script>
-
-</body>
+  </body>
 </html>
